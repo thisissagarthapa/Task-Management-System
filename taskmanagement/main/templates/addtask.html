@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <!-- boxicons cdn -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+      <!-- Alertify css Link -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Alertify Js -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- bootstrap css cdn link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <style>
+        /* General CSS settings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            scroll-behavior: smooth;
+            outline: none;
+            border: none;
+        }
+
+    .logo:hover {
+    color: inherit;
+     }
+        .add-task {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .form-container {
+            width: 80%;
+            max-width: 800px;
+            background: var(--second-bgcolor);
+            padding: 2rem;
+            border: 2px solid var(--main-color);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--main-color);
+            font-size: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-size: 1.6rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1.6rem;
+            border: 1px solid var(--main-color);
+        }
+
+        .addtask{
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-group input[type="submit"] {
+            background: var(--main-color);
+            color: var(--bg-color);
+            cursor: pointer;
+            padding: 0.5rem 1rem; /* Adjust padding to make button smaller */
+            border: 1px solid var(--main-color);
+            display: inline-block;
+            width: 15% !important;
+        }
+         @media (max-width: 600px) {
+        .form-group input[type="submit"] {
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            width: 50% !important;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background: #0cf;
+        }
+
+        .footer {
+            background: var(--second-bgcolor);
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-color);
+        }
+
+        .footer-iconTop a {
+            color: var (--main-color);
+            font-size: 2rem;
+        }
+
+        .footer-iconTop a:hover {
+            color: #0cf;
+        }
+    </style>
+</head>
+<body>
+    {% if messages %} {% for message in messages %}
+<script>
+  alertify.set("notifier", "position", "top-left");
+  alertify.success("{{message}}");
+</script>
+{% endfor %} {% endif %}
+     <!--  Header design -->
+   <header class="header">
+    <a href="#" class="logo">Task Management</a>
+    <i class="bx bx-menu" id="menu-icon"></i>
+    <navbar class="navbar">
+        <a href="{% url 'dashboard' %}" class=" {% if request.path == '/dashboard/' %}active{% endif %}">Dashboard</a>
+        <a href="{% url 'addTask' %}" class=" {% if request.path == '/addTask/' %}active{% endif %}">AddTask</a>
+        <a href="{% url 'viewTask' %}" class=" {% if request.path == '/viewTask/' %}active{% endif %}">ViewTask</a>
+        <a href="{% url 'log_out' %}"><button style="font-size: 1.5rem;" type="button" class="btn btn-info py-2 px-3 ">Logout</button>
+</a>
+    </navbar>
+   </header>
+
+    <!-- Add task form -->
+    <section class="add-task">
+   
+        <div class="form-container">
+            <h1>Add Task</h1>
+            <form action="{% url 'addTask' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="desc" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="open">Open</option>
+                        <option value="inprogress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assigned_to">Assigned To</label>
+                    <input type="text" id="assigned_to" name="assigned_to" required>
+                </div>
+                <div class="form-group">
+                    <label for="deadline">Deadline</label>
+                    <input type="date" id="deadline" name="deadline" required>
+                </div>
+                <div class="form-group addtask">
+                    <input type="submit" value="Add Task">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer section design -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>copyright &copy; 2024 by <span>Sagar Thapa</span> | All rights reserved</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <!-- bootstrap js cdn link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

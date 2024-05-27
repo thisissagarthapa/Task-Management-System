@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task management System </title>
+    <!-- boxicons cdn -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+     <!-- Alertify css Link -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Alertify Js -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- bootstraph css cdn link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        .logo:hover {
+    color: inherit; 
+}
+        .custom-h3 {
+            font-size: 2rem;
+            max-width: 50ch; 
+            line-height: 1.5; 
+            word-break: break-word; 
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+     <!--  Header design -->
+   <header class="header">
+    <a href="#" class="logo">Task Management</a>
+    <i class="bx bx-menu" id="menu-icon"></i>
+    <navbar class="navbar">
+        <a href="{% url 'index' %}" class=" {% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class=" {% if request.path == '/about/' %}active{% endif %}">About</a>
+        <a href="{% url 'contact' %}" class=" {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
+        <a href="{% url 'register' %}"><button style="font-size: 1.5rem;"  type="button" class="btn btn-secondary py-2 px-3 ">Register</button>
+        <a href="{% url 'log_in' %}"><button style="font-size: 1.5rem;" type="button" class="btn btn-info py-2 px-3 ">Login</button>
+</a>
+    </navbar>
+   </header>
+  {% block content %}
+    
+  {% endblock content %}
+    <!-- foote-section design -->
+<footer class="footer">
+    <div class="footer-text">
+        <p>copyright & copy; 2024 by <span>Sagar Thapa</span>|All rights resolved</p>
+    </div>
+    <div class="footer-iconTop">
+        <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+    </div>
+   <!-- bootstraph js cdn link -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
