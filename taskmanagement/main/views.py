@@ -1,5 +1,6 @@
+import datetime
+
 from django.shortcuts import render, redirect
-from .models import Task, Info
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
@@ -8,7 +9,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Count, Q
-import datetime
+
+from .models import Task
+from .models import Info
 
 current_date = datetime.datetime.now()
 current_year = datetime.datetime.now().year
@@ -178,21 +181,14 @@ def log_out(request):
 def task_report(request):
     tasks = Task.objects.filter(isDelete=False)
 
-    # Calculate tasks per status
-    tasks_per_status = tasks.values('status').annotate(total=Count('status'))
-
-    # Calculate tasks per user
-    tasks_per_user = tasks.values('assigned_to').annotate(total=Count('assigned_to'))
-
     # Calculate total, completed, in progress, and open tasks
     total_tasks = tasks.count()
     completed_tasks = tasks.filter(status='completed').count()
     inprogress_tasks = tasks.filter(status='inprogress').count()
     open_tasks = tasks.filter(status='open').count()
 
+
     context = {
-        'tasks_per_status': list(tasks_per_status),
-        'tasks_per_user': list(tasks_per_user),
         'total_tasks': total_tasks,
         'completed_tasks': completed_tasks,
         'inprogress_tasks': inprogress_tasks,
