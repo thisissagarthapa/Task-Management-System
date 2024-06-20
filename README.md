@@ -1,0 +1,1 @@
+This Django project provides a structured task management system to create, assign, track, and manage tasks efficiently, incorporating key features such as status updates, deadlines, and user assigning.
