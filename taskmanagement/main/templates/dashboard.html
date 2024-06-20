@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task management System </title>
+    <!-- boxicons cdn -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- bootstraph css cdn link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <style>
+    .logo:hover {
+    color: inherit;
+     }
+    </style>
+</head>
+<body>
+     <!--  Header design -->
+   <header class="header">
+    <a href="#" class="logo">Task Management</a>
+    <i class="bx bx-menu" id="menu-icon"></i>
+    <navbar class="navbar">
+        <a href="{% url 'dashboard' %}" class=" {% if request.path == '/dashboard/' %}active{% endif %}">Dashboard</a>
+        <a href="{% url 'addTask' %}" class=" {% if request.path == '/addTask/' %}active{% endif %}">AddTask</a>
+        <a href="{% url 'viewTask' %}" class=" {% if request.path == '/viewTask/' %}active{% endif %}">ViewTask</a>
+        <a href="{% url 'task_report' %}" class="{% if request.path == '/report/' %}active{% endif %}">Task Report</a>
+        <a href="{% url 'log_out' %}"><button style="font-size: 1.5rem;" type="button" class="btn btn-info py-2 px-3 ">Logout</button></a>
+    </navbar>
+   </header>
+   <!-- dashboard-home -->
+   <section class="home" id="home">
+    <div class="home-content">
+        <h1 class="text-center" style="font-size: 3rem;">Welcome to Your task management </h1>
+        <h1  class="text-center" style="font-size: 3rem;"><span class="mulitple-text text-center"> dashboard</span> </h1>        
+    </div>
+    
+   </section>
+
+    <!-- foote-section design -->
+<footer class="footer">
+    <div class="footer-text">
+        <p>copyright & copy; 2024 by <span>Sagar Thapa</span>|All rights resolved</p>
+    </div>
+    <div class="footer-iconTop">
+        <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+    </div>
+   <!-- bootstraph js cdn link -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
