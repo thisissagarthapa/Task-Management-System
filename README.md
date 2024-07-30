@@ -30,3 +30,4 @@ The Task Management System is a comprehensive web application built with Django,
 ![Screenshot (8)](https://github.com/user-attachments/assets/d96dc89f-d214-424e-b407-c61e70af60eb)
 
 
+![Screenshot (9)](https://github.com/user-attachments/assets/14fcabe0-4d2b-4f20-9cf1-523be445bf47)
