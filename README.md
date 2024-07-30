@@ -1,17 +1,26 @@
 # Task Management System
 
-## Description
+## Overview
 
-Task Management System is a Django-based web application designed to help users create, assign, track, and manage tasks efficiently. The system incorporates key features such as status updates, deadlines, and user assignments to ensure effective task management and team collaboration.
+The Task Management System is a comprehensive web application built with Django, designed to facilitate efficient task creation, assignment, tracking, and management. This system features a user-friendly interface and robust functionality to support team collaboration and task organization.
 
 ## Features
 
-- Create and manage tasks
-- Assign tasks to users
-- Update task status
-- Set and track deadlines
-- User authentication and authorization
-- Responsive user interface
+- **Task Management:** Seamlessly create, update, and manage tasks.
+- **User Assignment:** Assign tasks to users and track their progress.
+- **Status Updates:** Update and monitor task status with options such as Open, In Progress, and Completed.
+- **Deadline Tracking:** Set and manage deadlines to ensure timely task completion.
+- **User Authentication:** Secure login and registration for managing user access.
+- **Responsive Design:** A mobile-friendly interface that adapts to various screen sizes.
+- **API Integration:** Provides CRUD operations for tasks through Django REST Framework viewsets.
+
+## API Endpoints
+
+- **Tasks API:** `/api/taskInfo/`
+  - **GET**: Retrieve a list of tasks or a specific task by ID.
+  - **POST**: Create a new task.
+  - **PUT/PATCH**: Update an existing task.
+  - **DELETE**: Remove a task.
 
 ## Screenshot
 
