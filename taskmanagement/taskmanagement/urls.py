@@ -20,8 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Ensure this is included only once
-    path('', include('main.urls')),   # Include your app's URLs
+    path('admin/', admin.site.urls),
+    path('', include('main.urls')), 
+    path('', include('main.Api.urls')),   
 ]
 
 if settings.DEBUG:

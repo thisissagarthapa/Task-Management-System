@@ -165,7 +165,11 @@
                 </div>
                 <div class="form-group">
                     <label for="assigned_to">Assigned To</label>
-                    <input type="text" id="assigned_to" name="assigned_to" required>
+                    <select id="assigned_to" name="assigned_to" required>
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="deadline">Deadline</label>

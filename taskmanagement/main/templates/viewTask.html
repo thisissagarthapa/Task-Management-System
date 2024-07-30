@@ -118,6 +118,7 @@
                             <select name="sort_by" id="sort_by">
                                 <option value="title">Title</option>
                                 <option value="deadline">Deadline</option>
+                                <option value="status">Status</option>
                             </select>
                         </div>
                         <div>
@@ -144,7 +145,7 @@
                                     <td>{{i.title}}</td>
                                     <td>{{i.desc}}</td>
                                     <td>{{i.status}}</td>
-                                    <td>{{i.assigned_to}}</td>
+                                    <td>{{i.assigned_to.username}}</td>
                                     <td>{{i.deadline}}</td>
                                     <td>
                                         <a href="{% url 'update_data' i.id %}" class="btn btn-primary py-3 px-3">Edit</a>
