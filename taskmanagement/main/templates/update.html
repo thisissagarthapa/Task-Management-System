@@ -34,7 +34,7 @@
             --main-color: #0ef;
         }
 
-        .add-task {
+        .update-task {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -79,7 +79,7 @@
             border: 1px solid var(--main-color);
         }
 
-        .addtask{
+        .update-task-btn {
             display: flex;
             justify-content: center;
         }
@@ -132,7 +132,7 @@
     </header>
 
     <!-- Update task form -->
-  <section class="add-task">
+    <section class="update-task">
         <div class="form-container">
             <h1>Update Task</h1>
             <form action="{% url 'update_data' data.id %}" method="POST">
@@ -165,7 +165,19 @@
                     <label for="deadline">Deadline</label>
                     <input type="date" id="deadline" value="{{ data.deadline }}" name="deadline" required>
                 </div>
-                <div class="form-group addtask">
+                <div class="form-group">
+                    <label for="estimated_time">Estimated Time (hours)</label>
+                    <input type="number" step="0.1" id="estimated_time" value="{{ data.estimated_time }}" name="estimated_time" required>
+                </div>
+                <div class="form-group">
+                    <label for="actual_time">Actual Time (hours)</label>
+                    <input type="number" step="0.1" id="actual_time" value="{{ data.actual_time }}" name="actual_time">
+                </div>
+                <div class="form-group">
+                    <label for="complexity">Complexity (1-10)</label>
+                    <input type="number" id="complexity" value="{{ data.complexity }}" name="complexity" min="1" max="10" required>
+                </div>
+                <div class="form-group update-task-btn">
                     <input type="submit" value="Update Task">
                 </div>
             </form>

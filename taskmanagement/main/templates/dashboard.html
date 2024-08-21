@@ -26,6 +26,7 @@
         <a href="{% url 'addTask' %}" class=" {% if request.path == '/addTask/' %}active{% endif %}">AddTask</a>
         <a href="{% url 'viewTask' %}" class=" {% if request.path == '/viewTask/' %}active{% endif %}">ViewTask</a>
         <a href="{% url 'task_report' %}" class="{% if request.path == '/report/' %}active{% endif %}">Task Report</a>
+        <a href="{% url 'predict' %}" class="{% if request.path == '/predict/' %}active{% endif %}">Predict_time</a>
         <a href="{% url 'log_out' %}"><button style="font-size: 1.5rem;" type="button" class="btn btn-info py-2 px-3 ">Logout</button></a>
     </navbar>
    </header>

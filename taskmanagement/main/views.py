@@ -74,20 +74,33 @@ def dashboard(request):
 
 @login_required(login_url='log_in')
 def addTask(request):
-    users=User.objects.all()
+    users = User.objects.all()
     if request.method == 'POST':
-        title = request.POST['title']
-        desc = request.POST['desc']
-        status = request.POST['status']
-        assigned_to_id = request.POST['assigned_to']
-        print('Assigned_to_id'  ,assigned_to_id)
+        title = request.POST.get('title')
+        desc = request.POST.get('desc')
+        status = request.POST.get('status')
+        assigned_to_id = request.POST.get('assigned_to')
+        deadline = request.POST.get('deadline')
+        estimated_time = request.POST.get('estimated_time')
+        actual_time = request.POST.get('actual_time')
+        complexity = request.POST.get('complexity')
+        
         assigned_to = User.objects.get(id=assigned_to_id)
-        print("assigned_to",assigned_to)
-        deadline = request.POST['deadline']
-        Task.objects.create(title=title, desc=desc, status=status, assigned_to=assigned_to, deadline=deadline)
+        
+        Task.objects.create(
+            title=title,
+            desc=desc,
+            status=status,
+            assigned_to=assigned_to,
+            deadline=deadline,
+            estimated_time=estimated_time,
+            actual_time=actual_time,
+            complexity=complexity
+        )
         messages.success(request, 'Task added successfully')
-        return redirect('addTask')
-    return render(request, 'addtask.html',{'users':users})
+        return redirect('addTask') 
+    else:
+        return render(request, 'addtask.html', {'users': users})
 
 
 @login_required(login_url='log_in')
@@ -102,19 +115,21 @@ def delete_data(request, id):
 @login_required(login_url='log_in')
 def update_data(request, id):
     task = Task.objects.get(id=id)
-    users = User.objects.all() 
+    users = User.objects.all()
 
     if request.method == 'POST':
         title = request.POST['title']
         desc = request.POST['desc']
         status = request.POST['status']
-        assigned_to_id = request.POST['assigned_to'] 
+        assigned_to_id = request.POST['assigned_to']
         deadline = request.POST['deadline']
+        estimated_time = request.POST['estimated_time']
+        actual_time = request.POST['actual_time']
+        complexity = request.POST['complexity']
 
         try:
             assigned_to = User.objects.get(id=assigned_to_id)
         except User.DoesNotExist:
-            # Handle the case where the user does not exist
             messages.error(request, 'User not found')
             return redirect('update_data', id=id)
 
@@ -122,13 +137,15 @@ def update_data(request, id):
         task.title = title
         task.desc = desc
         task.status = status
-        task.assigned_to = assigned_to 
+        task.assigned_to = assigned_to
         task.deadline = deadline
-        task.save() 
-        
+        task.estimated_time = estimated_time
+        task.actual_time = actual_time
+        task.complexity = complexity
+        task.save()
+
         messages.success(request, 'Successfully updated')
         return redirect('addTask')
-
     return render(request, 'update.html', {'data': task, 'users': users})
 @login_required(login_url='log_in')
 
