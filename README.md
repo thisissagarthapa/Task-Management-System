@@ -26,18 +26,20 @@ The Task Management System is a powerful web application built with Django, desi
   - **DELETE**: Remove a task.
 
 ## Screenshot
-![Screenshot (5)](https://github.com/user-attachments/assets/7ed14f5f-74d5-472e-92b9-3a5c8295a7e5)
-![Screenshot (6)](https://github.com/user-attachments/assets/4fd44acc-03eb-40fd-97b8-b784afc8e9b9)
+![Screenshot (29)](https://github.com/user-attachments/assets/94b5af67-f3ec-4c66-87b5-2b95d58851c6)
+![Screenshot (28)](https://github.com/user-attachments/assets/8d04565a-e153-41c8-871b-1ba93ba64c4e)
+![Screenshot (30)](https://github.com/user-attachments/assets/7d6f68e8-cdca-4af2-b8bb-efc84d92b26e)
+![Screenshot (31)](https://github.com/user-attachments/assets/7b896174-5799-4731-8a1b-4aacb00f9fcb)
+![Screenshot (32)](https://github.com/user-attachments/assets/fc3a3deb-e03e-486c-b194-cee0455b28f1)
+![Screenshot (33)](https://github.com/user-attachments/assets/459b20eb-a105-4d28-9112-bb767504ce72)
+![Screenshot (35)](https://github.com/user-attachments/assets/2c7bbcaf-cba2-4a19-a540-2f5e5d075a96)
+![Screenshot (34)](https://github.com/user-attachments/assets/f6733516-ac56-4ea4-98f6-4eef49e7f0e5)
 
-![Screenshot (7)](https://github.com/user-attachments/assets/92fd6561-85f9-4163-9187-ca47f4d16f13)
-![Screenshot (8)](https://github.com/user-attachments/assets/d96dc89f-d214-424e-b407-c61e70af60eb)
-
-![Screenshot (9)](https://github.com/user-attachments/assets/14fcabe0-4d2b-4f20-9cf1-523be445bf47)
 
 ## Installation
 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/task-management-system.git
+   git clone https://github.com/thisissagarthapa/task-management-system.git
    cd task-management-system
