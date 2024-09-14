@@ -50,3 +50,15 @@ The Task Management System is a powerful web application built with Django, desi
    ```bash
    git clone https://github.com/thisissagarthapa/task-management-system.git
    cd task-management-system
+
+
+## Installation Using Docker
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/thisissagarthapa/task-management-system.git
+   cd task-management-system
+   * docker build -t taskmanagement .
+   *docker run --name task-c1 -p 8000:8000 taskmanagement
+
+
