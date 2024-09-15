@@ -16,7 +16,7 @@ The Task Management System is a powerful web application built with Django, desi
 - **Predictive Analytics:** Use machine learning to predict task completion times based on historical data.
 - **User-Friendly Interface:** Responsive design for seamless use across devices, including mobile.
 - **API Integration:** Comprehensive CRUD operations for tasks through Django REST Framework.
-- - 🐳 **Dockerized**: The application is containerized using Docker for easy deployment and scalability.
+- 🐳 **Dockerized**: The application is containerized using Docker for easy deployment and scalability.
 
 
 ## API Endpoints
