@@ -1,42 +1,77 @@
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler
 from django.shortcuts import render
+from main.models import Task
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.svm import SVR
+from sklearn.ensemble import VotingRegressor
+from sklearn.model_selection import train_test_split
 from django.contrib.auth.decorators import login_required
-
-from main.models  import Task
-
 
 @login_required(login_url='log_in')
 def predict_completion_time(request):
-    # Load tasks data from the database
+    # Fetching tasks data
     tasks = Task.objects.filter(isDelete=False)
-    
-    # Create a DataFrame for the regression model
-    data = {
-        'estimated_time': [task.estimated_time for task in tasks],
-        'complexity': [task.complexity for task in tasks],
-        'actual_time': [task.actual_time for task in tasks if task.actual_time is not None]
+
+    # Creating a DataFrame
+    dic = {
+        "estimated_time": [task.estimated_time for task in tasks if task.estimated_time is not None],
+        "complexity": [task.complexity for task in tasks if task.complexity is not None],
+        "actual_time": [task.actual_time for task in tasks if task.actual_time is not None]
     }
 
-    # Only include tasks that have actual times recorded
-    df = pd.DataFrame(data).dropna()
+    df = pd.DataFrame(dic)
 
-    # If there's enough data, train the model
-    if not df.empty:
-        reg = LinearRegression()
-        reg.fit(df[['estimated_time', 'complexity']], df['actual_time'])
+    # Checking if DataFrame is not empty
+    if df.empty:
+        return render(request, "prediction/predict_completion.html", {"error": "No task data available for prediction."})
 
-        # Predict completion time based on form inputs (or any specific task data)
-        if request.method == 'POST':
-            estimated_time = float(request.POST['estimated_time'])
-            complexity = int(request.POST['complexity'])
+    # Preparing features (X) and target (y)
+    x = df.iloc[:, :-1]
+    y = df["actual_time"]
 
-            # Make a prediction
-            predicted_time = reg.predict([[estimated_time, complexity]])
+    # Splitting the data
+    x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=42)
 
-            # Render the result in the template
-            return render(request, 'prediction/predict_completion.html', {'predicted_time': predicted_time[0]})
+    # Models
+    lr = LinearRegression()
+    kn = KNeighborsRegressor(n_neighbors=3)
+    sv = SVR(kernel="linear")
 
-    return render(request, 'prediction/predict_completion.html')
+    # Training models
+    lr.fit(x_train, y_train)
+    kn.fit(x_train, y_train)
+    sv.fit(x_train, y_train)
+
+    # Voting Regressor
+    prd = [("lr", lr), ("knn", kn), ("sv", sv)]
+    vc = VotingRegressor(estimators=prd, weights=[8, 5, 1])
+    vc.fit(x_train, y_train)
+
+    train_score = vc.score(x_train, y_train) * 100
+    test_score = vc.score(x_test, y_test) * 100
+    
+    print(train_score,test_score)
+
+    if request.method == "POST":
+        estimated_time = float(request.POST.get("estimated_time"))
+        complexity = float(request.POST.get("complexity"))
+        
+        # Convert input data to DataFrame to retain feature names
+        input_data = pd.DataFrame([[estimated_time, complexity]], columns=x.columns)
+
+        # Predicting the completion time
+        predicted_time = vc.predict(input_data)[0]
+
+        context = {
+            'predicted_time': predicted_time,
+            'train_score': train_score,
+            'test_score': test_score,
+        }
+        return render(request, "prediction/predict_completion.html", context)
+
+    return render(request, "prediction/predict_completion.html")
